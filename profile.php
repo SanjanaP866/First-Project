@@ -85,48 +85,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<style>
-.center-form {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    background-color: #f9f9f9;
-}
+<div class="container py-5">
+    <div class="center-form">
+        <h2 class="text-center mb-4">Update Profile</h2>
 
-.center-form input, .center-form button {
-    width: 100%;
-    padding: 8px;
-    margin-top: 10px;
-}
-</style>
+        <?php if ($success_message): ?>
+            <div class="alert alert-success text-center"><?php echo $success_message; ?></div>
+        <?php elseif ($error_message): ?>
+            <div class="alert alert-danger text-center"><?php echo $error_message; ?></div>
+        <?php endif; ?>
 
-<div class="center-form">
-    <h2 style="text-align:center;">Update Profile</h2>
+        <form method="post" action="">
+            <div class="mb-3">
+                <label class="form-label">Name:</label>
+                <input type="text" class="form-control" name="name" value="<?php echo htmlspecialchars($user['full_name']); ?>" required>
+            </div>
 
-    <?php if ($success_message): ?>
-        <p style="color: green; text-align:center;"><?php echo $success_message; ?></p>
-    <?php elseif ($error_message): ?>
-        <p style="color: red; text-align:center;"><?php echo $error_message; ?></p>
-    <?php endif; ?>
+            <div class="mb-3">
+                <label class="form-label">Email:</label>
+                <input type="email" class="form-control" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+            </div>
 
-    <form method="post" action="">
-        <label>Name:</label>
-        <input type="text" name="name" value="<?php echo htmlspecialchars($user['full_name']); ?>" required>
+            <div class="mb-3">
+                <label class="form-label">Current Password:</label>
+                <input type="password" class="form-control" name="current_password">
+            </div>
 
-        <label>Email:</label>
-        <input type="email" name="email" value="<?php echo htmlspecialchars($user['email']); ?>" required>
+            <div class="mb-3">
+                <label class="form-label">New Password:</label>
+                <input type="password" class="form-control" name="new_password">
+            </div>
 
-        <label>Current Password:</label>
-        <input type="password" name="current_password">
+            <div class="mb-3">
+                <label class="form-label">Confirm New Password:</label>
+                <input type="password" class="form-control" name="confirm_password">
+            </div>
 
-        <label>New Password:</label>
-        <input type="password" name="new_password">
-
-        <label>Confirm New Password:</label>
-        <input type="password" name="confirm_password">
-
-        <button type="submit">Update</button>
-    </form>
+            <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+        </form>
+    </div>
 </div>
+
+<?php require_once 'footer.php'; ?>
